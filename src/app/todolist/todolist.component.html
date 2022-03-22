@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <span>Todo list</span>
+</mat-toolbar>
+<div class="container">
+  <div style="width: 500px;">
+    <div class="form-container" style="width: 100%">
+        <form [formGroup]="myForm">
+          <h2>What is your plan for Today ?</h2>
+          <p style="display: flex">
+            <mat-form-field appearance="legacy" id="description" style="flex-grow:1">
+              <mat-label>Add a todo</mat-label>
+              <input formControlName="description" matInput>
+              <mat-hint>Add a todo to your list</mat-hint>
+            </mat-form-field>&nbsp;
+            <button [disabled]="isEditable" mat-raised-button mat-button color="primary" style="align-self: center" (click)="adicionar()">Add</button>
+          </p>
+        </form>
+    </div>
+    <div style="margin-top: 8px">
+      <table [hidden]="isEditable" #table1 mat-table [dataSource]="load()" class="mat-elevation-z8" style="border-spacing:0px 8px !important;">
+        <ng-container matColumnDef="item" >
+          <th mat-header-cell *matHeaderCellDef> ITEM </th>
+          <td mat-cell *matCellDef="let element"  [ngStyle]="{backgroundColor:element.bgColor}" style="color: white"> {{element.item}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions" >
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element ; let i = index" style="width:100px;padding:0" [ngStyle]="{backgroundColor:element.bgColor}">
+            <div style="display: flex;width: 100%;justify-content: right">
+              <button mat-icon-button style="color:white" (click)="prepEdit(i)">
+                <span class="material-icons">edit</span>
+              </button>
+              <button mat-icon-button style="color:white" (click)="deletar(i)">
+                <span class="material-icons">delete_outline</span>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <p [hidden]="!isEditable">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Editar</mat-label>
+          <input matInput #edit id="editable">
+          <button matSuffix mat-icon-button color="primary" (click)="editar()" style="top: -8px;">
+            <span class="material-icons">edit</span>
+          </button>
+        </mat-form-field>
+      </p>
+    </div>
+  </div>
+</div>
