@@ -10,4 +10,16 @@ html * {
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
+.disabled {
+  position: relative;
+}
+.disabled td::before {
+  position: absolute;
+  content:"";
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(155,155,155,0.5);
+}

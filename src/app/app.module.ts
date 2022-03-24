@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { InativarDirective } from './inativar.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodolistComponent
+    TodolistComponent,
+    InativarDirective
   ],
   imports: [
     BrowserModule,
